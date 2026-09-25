@@ -1,8 +1,21 @@
 import vinext from "vinext";
 import { defineConfig } from "vite";
-import hostingConfig from "./.openai/hosting.json";
 import { readExecutionProfile } from "./scripts/execution-profile.mjs";
 import { sites } from "./build/sites-vite-plugin";
+import fs from "node:fs";
+import path from "node:path";
+
+// Lê e faz o parse do arquivo JSON de forma segura sem disparar erros no TypeScript
+const hostingConfigPath = path.resolve(process.cwd(), "./.openai/hosting.json");
+let hostingConfig: { d1?: string; r2?: string } = {};
+
+if (fs.existsSync(hostingConfigPath)) {
+  try {
+    hostingConfig = JSON.parse(fs.readFileSync(hostingConfigPath, "utf-8"));
+  } catch (e) {
+    console.warn("⚠️ Não foi possível ler o arquivo .openai/hosting.json:", e);
+  }
+}
 
 const SITE_CREATOR_PLACEHOLDER_DATABASE_ID =
   "00000000-0000-4000-8000-000000000000";
