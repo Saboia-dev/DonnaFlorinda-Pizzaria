@@ -1,0 +1,5 @@
+# Desenvolvimento local: copie este arquivo para .dev.vars se quiser configurar a API.
+# Deixe vazio para preservar o painel somente leitura.
+ADMIN_EMAILS=
+MP_ACCESS_TOKEN=
+SITE_URL=http://localhost:5173
